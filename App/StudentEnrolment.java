@@ -9,6 +9,8 @@ public final class StudentEnrolment {
     private static Scanner input;
 
     private static ArrayList<Student> StudentList = new ArrayList<>();
+    private static boolean CheckID;
+
     public static boolean isEmptyList() {
         return (StudentList.size() == 0);
 
@@ -53,7 +55,7 @@ public final class StudentEnrolment {
     }
 
     private static Student createStudent(final boolean CheckID) {
-        String TempString ="";
+        String TempString = "";
         Student newStudent = new Student();
         TempString = "";
 
@@ -75,6 +77,7 @@ public final class StudentEnrolment {
         TempString = input.nextLine();
         System.out.print("Enrol Course  :");
         TempString = input.nextLine();
+        return newStudent;
     }
 
         public static void deleteList() {

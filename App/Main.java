@@ -26,28 +26,63 @@ public final class Main {
         Boolean isExit = false;
         String Temp ="";
         while (true) {
-            System.out.print("Student Enrolment");
-            System.out.print("1" + Add + "Add student");
-            System.out.print("2" + Update + "Update student");
-            System.out.print("3" + Delete + "Delete student");
-            System.out.print("4" + GetOne + "Get one student");
-            System.out.print("5" + GetAll + "Get all student");
+            System.out.println("Student Enrolment");
+            System.out.println(Add + " Add");
+            System.out.println(Update + " Update");
+            System.out.println(Delete + " Delete");
+            System.out.println(GetOne + " Get one");
+            System.out.println(GetAll + " Get all");
+            System.out.println(Exit + " Exit");
 
-            System.out.println("Choose an option");
-            Temp = scanner.nextLine();
-            choice = Integer.parseInt(Temp);
+            while(true) {
+                System.out.print("Choose an option: ");
+                Temp = scanner.nextLine();
+                choice = Integer.parseInt(Temp);
+                break;
+            }
+
+            switch (choice) {
+                case Add:
+                    StudentEnrolment.addList();
+                    break;
+                case Update:
+                    StudentEnrolment.Edit();
+                    break;
+                case Delete:
+                    StudentEnrolment.deleteList();
+                    break;
+                case Exit:
+                    isExit = true;
+                    break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+
+            if(isExit) {
+                break;
+            }
+
+            clearConsole();
+            System.out.println("Press enter to continue");
+
+            while (Temp !=null) {
+                if (Temp.isEmpty()) {
+                    break;
+                }
+                if (scanner.hasNextLine()) {
+                    Temp = scanner.nextLine();
+                } else {
+                    Temp = null;
+                }
+            }
 
         }
 
-        switch (choice) {
-            case Add -> StudentEnrolment.addList();
-            case Update -> StudentEnrolment.Edit();
-            case Delete -> StudentEnrolment.deleteList();
-            case Exit -> isExit = true;
-            default -> System.out.println("Invalid input");
-        }
-        if(isExit) {
-        }
+    }
+
+    private static void clearConsole() {
+        System.out.println("-------------------------------------");
     }
 
 }
