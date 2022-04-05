@@ -4,30 +4,39 @@ package App;
 import java.util.ArrayList;
 
 public class Student {
-    private String StudentID;
+    private static int StudentID;
     private String StudentName;
     private String BirthDate;
-    private ArrayList<Student> StudentList;
 
-    public Student(String StudentName, String StudentID, String BirthDate) {
+    public Student(final String StudentName, final int StudentID, final String BirthDate) {
+        super();
         this.StudentName = StudentName;
         this.StudentID = StudentID;
         this.BirthDate = BirthDate;
-        this.StudentList = new ArrayList<Student>();
+    }
+
+    public Student() {
+        super();
     }
 
     public String getStudentName () {
         return StudentName;
     }
-    public String getStudentID () {
+    public static int getStudentID() {
         return StudentID;
     }
     public String getBirthDate () {
         return BirthDate;
     }
-    public ArrayList<Student> getStudentList () {
-        return StudentList;
+
+    public void setStudentID(final int inputID) {
+        this.StudentID = inputID;
     }
+    public void setStudentName(final String inputName) {
+        this.StudentName = inputName;
+    }
+
+
     @Override
     public String toString() {
         return "Student{" +

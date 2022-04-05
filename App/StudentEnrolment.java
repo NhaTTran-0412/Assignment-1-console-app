@@ -1,56 +1,93 @@
 package App;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class StudentEnrolment {
-    public static void main (String [] args) {
-            Menu();
+public final class StudentEnrolment {
+    private static int choice;
 
+    private static Scanner input;
 
-    }
-    public static void Menu() {
-
-
-
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Choose an action:");
-        System.out.println("1. Enroll Student");
-        System.out.println("2. Update Enrolment");
-        int input = scan.nextInt();
-        if (input == 1 ) {
-            enroll();
-        }
-        if (input == 2 ) {
-            System.out.println("Updated");
-        }
-
-
+    private static ArrayList<Student> StudentList = new ArrayList<>();
+    public static boolean isEmptyList() {
+        return (StudentList.size() == 0);
 
     }
-    public static void enroll() {
-        ArrayList<Student> StudentEnrollment = new ArrayList<>();
 
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Student ID:");
-        String StudentID = scan.nextLine();
-        System.out.println("Semester:");
-        String Sem = scan.nextLine();
-        System.out.println("Course:");
-        String Course = scan.nextLine();
+    public static boolean IDExisted(final int id) {
+        for (Student Student : StudentList) {
+            if (Student.getStudentID() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    private StudentEnrolment(){
 
-        Student Student = new Student(StudentID,Sem,Course);
-        StudentEnrollment.add(Student);
+    }
+    public static void init() {
+        choice = 0;
+        input = new Scanner(System.in);
+        StudentList.clear();
+    }
 
+    public static void Edit() {
+        String TempString = "";
+        int StudentID = 0;
 
-        //System.out.println("Enrolled Student " + ID + '\n' + "on Semester " + Sem + '\n' + "to Course " + Course);
-        for(Student elem : StudentEnrollment){
-            System.out.println("enrolled" + elem);
+        System.out.print("Student ID: ");
+        TempString = input.nextLine();
+
+        if (IDExisted(StudentID)) {
+            StudentList.add(createStudent(CheckID = false));
+            System.out.print("Add Complete");
+        } else {
+            System.out.print("ID does nto exist");
+        }
+    }
+    public static void addList() {
+        Student newStudent = createStudent(CheckID = true);
+        StudentList.add(newStudent);
+        System.out.println("Added a student");
+    }
+
+    private static Student createStudent(final boolean CheckID) {
+        String TempString ="";
+        Student newStudent = new Student();
+        TempString = "";
+
+        System.out.print("Student ID    :");
+        TempString = input.nextLine();
+        int id = Integer.parseInt(TempString);
+        if (CheckID) {
+            if (IDExisted(id)) {
+                System.out.println("ID already existed");
+            } else {
+                newStudent.setStudentID(id);
+            }
         }
 
+        System.out.print("Student Name  :");
+        TempString = input.nextLine();
+
+        System.out.print("Semester      :");
+        TempString = input.nextLine();
+        System.out.print("Enrol Course  :");
+        TempString = input.nextLine();
+    }
+
+        public static void deleteList() {
+            String TempString = "";
+            int StudentID = 0;
+
+            System.out.print("Student ID     :");
+            TempString = input.nextLine();
+            if (IDExisted(StudentID)) {
+                StudentList.remove(StudentID);
+                System.out.println("Deleted student");
+        } else {
+                System.out.println("Student ID does not exist");
+            }
     }
 }
-
-
